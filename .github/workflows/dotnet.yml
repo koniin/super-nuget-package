@@ -22,7 +22,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack it up
-      run: dotnet pack --configuration Release
+      run: dotnet pack -p:PackageVersion=1.0.1 --configuration Release
     - name: LS
       run: ls bin/Release/
     - name: auth
