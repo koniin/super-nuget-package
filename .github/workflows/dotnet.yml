@@ -22,10 +22,10 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack it up
-      run: dotnet pack -p:PackageVersion=1.0.1 --configuration Release
+      run: dotnet pack -p:PackageVersion=1.0.${{ github.run_number }} --configuration Release
     - name: LS
       run: ls bin/Release/
     - name: auth
       run: dotnet nuget add source --username koniin --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/koniin/index.json"
     - name: push nuget
-      run: dotnet nuget push "bin/Release/super-nuget-package.1.0.1.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+      run: dotnet nuget push "bin/Release/super-nuget-package.1.0.${{ github.run_number }}.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
