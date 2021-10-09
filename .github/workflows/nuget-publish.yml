@@ -7,8 +7,6 @@ on:
 
 jobs:
   publish-package:
-    - name: Publish Nuget Package to Github
-
     runs-on: ubuntu-latest
 
     steps:
