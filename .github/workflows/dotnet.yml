@@ -1,0 +1,31 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Pack it up
+      run: dotnet pack --configuration Release
+    - name: LS
+      run: ls bin/Release/
+    - name: auth
+      run: dotnet nuget add source --username koniin --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/koniin/index.json"
+    - name: push nuget
+      run: dotnet nuget push "bin/Release/super-nuget-package.1.0.0.nupkg" --api-key ${{ secrets.ACCESS_TOKEN_GITHUB }} --source "github"
