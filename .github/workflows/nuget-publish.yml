@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  publish-package:
+    - name: Publish Nuget Package to Github
 
     runs-on: ubuntu-latest
 
