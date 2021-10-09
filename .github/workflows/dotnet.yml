@@ -28,4 +28,4 @@ jobs:
     - name: auth
       run: dotnet nuget add source --username koniin --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/koniin/index.json"
     - name: push nuget
-      run: dotnet nuget push "bin/Release/super-nuget-package.1.0.0.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+      run: dotnet nuget push "bin/Release/super-nuget-package.1.0.1.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
